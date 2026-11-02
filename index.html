@@ -71,9 +71,14 @@ img{display:block}
 /* ritratto nel tempo */
 .tempo{--colore-viaggio:var(--oggi)}
 .palco{position:relative;width:100%;aspect-ratio:4/5;max-height:66vh;max-height:66svh;overflow:hidden;background:var(--colore-viaggio);transition:background-color .5s var(--ease-out);touch-action:pan-y;user-select:none;-webkit-user-select:none}
-.scatto{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .2s var(--ease-out)}
+.scatto{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .2s var(--ease-out);-webkit-user-drag:none}
 .scatto.is-on{opacity:1}
 .palco.rapido .scatto{transition:none}
+/* sulla linea del tempo le foto si danno il cambio con una dissolvenza breve; col dito sulla foto scorrono */
+.palco.sfoglia .scatto{transition:opacity .14s linear}
+.palco.scorre .scatto{transition:transform .32s var(--ease-out)}
+.palco.trascina .scatto{transition:none}
+@media (hover:hover){.palco{cursor:grab}.palco.trascina{cursor:grabbing}}
 /* la foto sfuma nel colore del viaggio: foto e pannello sono una superficie sola */
 .palco::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(to top,rgba(0,0,0,.5),rgba(0,0,0,0) 48%);background:linear-gradient(to top,var(--colore-viaggio) 0%,color-mix(in srgb,var(--colore-viaggio) 60%,transparent) 24%,transparent 52%)}
 .palco.senza-foto::after{display:none}
@@ -86,14 +91,14 @@ img{display:block}
 .firma p{margin-top:6px;font-size:15px;color:rgba(255,255,255,.86)}
 .codice{font-variant-numeric:tabular-nums;white-space:nowrap}
 .firma a,.pannello-scheda{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;text-decoration-color:rgba(255,255,255,.55)}
-.pannello{background:var(--colore-viaggio);color:#fff;padding:14px 20px 16px;transition:background-color .5s var(--ease-out)}
+.pannello{background:var(--colore-viaggio);color:#fff;padding:8px 20px 18px;transition:background-color .5s var(--ease-out)}
 .pannello-riga{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
 .pannello-viaggio{font:700 28px/1.1 var(--font-titoli);letter-spacing:-.025em}
 .pannello-anno{font:300 28px/1.1 var(--font-titoli);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
 .pannello-riga2{margin-top:4px;font-size:15px;color:rgba(255,255,255,.84);text-wrap:pretty}
 .pannello-frase{margin-top:12px;font-size:17px;line-height:1.36;text-wrap:pretty}
 .pannello-scheda{display:inline-block;margin-top:12px;font-size:15px;font-weight:600;color:#fff}
-.linea{position:relative;height:46px;margin-top:14px;touch-action:none;cursor:grab;user-select:none;-webkit-user-select:none}
+.linea{position:relative;height:46px;margin-top:0;touch-action:none;cursor:grab;user-select:none;-webkit-user-select:none}
 .linea.trascina{cursor:grabbing}
 .binario{position:absolute;left:0;right:0;top:15px;height:3px;border-radius:2px;background:rgba(255,255,255,.34)}
 .futuro{position:absolute;top:15px;height:3px;background-image:radial-gradient(circle,rgba(255,255,255,.7) 1.2px,transparent 1.6px);background-size:7px 3px}
@@ -108,6 +113,7 @@ img{display:block}
 .etichetta.prima{transform:none}
 .etichetta.futura{color:var(--giallo)}
 .istruzione{margin-top:2px;font-size:13px;color:rgba(255,255,255,.74)}
+.pannello-testi{margin-top:12px}
 
 /* bio */
 .bio{padding:26px 20px 0}
@@ -237,15 +243,17 @@ img{display:block}
       </div>
     </div>
     <div class="pannello" id="pannello">
-      <div class="pannello-riga">
-        <p class="pannello-viaggio" id="p-viaggio">Oggi</p>
-        <p class="pannello-anno" id="p-anno">2026</p>
-      </div>
-      <p class="pannello-riga2" id="p-riga">12 viaggi con Avventure nel Mondo, 5 da coordinatore.</p>
-      <p class="pannello-frase" id="p-frase" hidden></p>
-      <a class="pannello-scheda" id="p-scheda" href="https://www.viaggiavventurenelmondo.it/" target="_blank" rel="noopener" hidden>Scheda del viaggio</a>
       <div class="linea" id="linea" hidden></div>
-      <p class="istruzione" id="istruzione" hidden>Trascina per sfogliare i viaggi</p>
+      <p class="istruzione" id="istruzione" hidden>Scorri la foto o trascina la linea</p>
+      <div class="pannello-testi" id="p-testi">
+        <div class="pannello-riga">
+          <p class="pannello-viaggio" id="p-viaggio">Oggi</p>
+          <p class="pannello-anno" id="p-anno">2026</p>
+        </div>
+        <p class="pannello-riga2" id="p-riga">12 viaggi con Avventure nel Mondo, 5 da coordinatore.</p>
+        <p class="pannello-frase" id="p-frase" hidden></p>
+        <a class="pannello-scheda" id="p-scheda" href="https://www.viaggiavventurenelmondo.it/" target="_blank" rel="noopener" hidden>Scheda del viaggio</a>
+      </div>
     </div>
     <p class="sr" id="annuncio" aria-live="polite"></p>
   </section>
@@ -600,13 +608,13 @@ linea.hidden = false;
 $("#istruzione").hidden = false;
 
 // foto: piccole per lo scorrimento veloce, grandi a riposo; il colore del viaggio si prende dalla foto
-const statoFoto = new Map();
+const statoFoto = new Map(), pronte = new Set(), mancanti = new Set();
 function carica(src) {
   if (statoFoto.has(src)) return statoFoto.get(src);
   const pr = new Promise(ok => {
     const im = new Image();
-    im.onload = () => ok(im);
-    im.onerror = () => ok(null);
+    im.onload = () => { pronte.add(src); ok(im); };
+    im.onerror = () => { mancanti.add(src); ok(null); };
     im.src = src;
   });
   statoFoto.set(src, pr);
@@ -657,6 +665,7 @@ carica("foto/hero.jpg").then(im => {
   if (!im) return;
   oggiFrame.riga = rigaOggi;
   if (corrente === OGGI) pRiga.textContent = rigaOggi;
+  misuraTesti();
 });
 fotogrammi.forEach(f => {
   carica("foto/mini/" + f.foto).then(im => {
@@ -671,7 +680,21 @@ fotogrammi.forEach(f => {
 
 let corrente = OGGI, livello = 0, richiesta = 0;
 const generazione = [0, 0];
-async function mostraFoto(f, veloce) {
+const ESCI = "cubic-bezier(.23,1,.32,1)";
+// data-alza: alza la foto di N% quando il soggetto è troppo in basso; sotto entra il colore del viaggio.
+// La sfumatura si allunga con l'alzata, così il bordo della foto non si vede.
+const sposta = (x, alza) => `translate3d(${x}px, ${alza ? -alza : 0}%, 0)`;
+const maschera = alza => alza ? `linear-gradient(to bottom, #000 ${80 - alza}%, transparent)` : "";
+const altDi = f => f.oggi ? "Manfredi oggi" : `Manfredi in viaggio: ${f.titolo}, ${f.annoTesto}`;
+function preparaStrato(s, src, f) {
+  s.src = src;
+  s.style.transform = sposta(0, f.alza);
+  s.style.webkitMaskImage = s.style.maskImage = maschera(f.alza);
+  s.alt = altDi(f);
+  s.hidden = false;
+}
+async function mostraFoto(f, modo, verso) {
+  const veloce = modo === "lapse" || modo === "dito";
   const mio = ++richiesta;
   const grande = "foto/" + f.foto, piccola = "foto/mini/" + f.foto;
   let im = veloce ? await carica(piccola) : null;
@@ -691,28 +714,39 @@ async function mostraFoto(f, veloce) {
   const prossimo = strati[ip], uscente = strati[iu];
   generazione[ip]++;
   const g = generazione[iu];
-  prossimo.src = im.src;
-  // data-alza: alza la foto di N% quando il soggetto è troppo in basso; sotto entra il colore del viaggio.
-  // La sfumatura si allunga con l'alzata, così il bordo della foto non si vede.
-  prossimo.style.transform = f.alza ? `translateY(-${f.alza}%)` : "";
-  prossimo.style.webkitMaskImage = prossimo.style.maskImage = f.alza ? `linear-gradient(to bottom, #000 ${80 - f.alza}%, transparent)` : "";
-  prossimo.alt = f.oggi ? "Manfredi oggi" : `Manfredi in viaggio: ${f.titolo}, ${f.annoTesto}`;
-  prossimo.hidden = false;
+  preparaStrato(prossimo, im.src, f);
+  // con un tocco o coi tasti la foto nuova entra dal lato verso cui si va
+  const scivola = !!verso && !veloce && !RIDUCI;
   requestAnimationFrame(() => {
     prossimo.classList.add("is-on");
     uscente.classList.remove("is-on");
+    if (!scivola) return;
+    const tempi = { duration: 380, easing: ESCI }, da = uscente.style.transform || "translateX(0)";
+    prossimo.animate([{ transform: sposta(verso * 28, f.alza), opacity: 0 }, { transform: sposta(0, f.alza), opacity: 1 }], tempi);
+    uscente.animate([{ transform: da, opacity: 1 }, { transform: `${da} translateX(${-verso * 28}px)`, opacity: 0 }], tempi);
   });
   livello = ip;
-  // lo strato uscente si nasconde a dissolvenza finita, solo se nel frattempo non è stato riusato
-  setTimeout(() => { if (generazione[iu] === g) uscente.hidden = true; }, veloce ? 40 : 260);
+  // lo strato uscente si nasconde a transizione finita, solo se nel frattempo non è stato riusato
+  setTimeout(() => { if (generazione[iu] === g) uscente.hidden = true; }, modo === "lapse" ? 40 : modo === "dito" ? 160 : scivola ? 400 : 260);
+}
+// col dito sulla foto quella nuova è già entrata: diventa la corrente, poi arriva la versione grande
+function adotta(f) {
+  const mio = ++richiesta;
+  const iu = livello, ip = 1 - livello, uscente = strati[iu], entrata = strati[ip];
+  livello = ip;
+  titoloPalco(f);
+  palco.classList.toggle("senza-foto", entrata.hidden);
+  const g = generazione[iu];
+  setTimeout(() => {
+    palco.classList.remove("scorre");
+    if (generazione[iu] === g) { uscente.classList.remove("is-on"); uscente.hidden = true; uscente.style.transform = ""; }
+  }, 340);
+  const grande = "foto/" + f.foto;
+  if (!entrata.hidden && !entrata.src.endsWith(grande)) carica(grande).then(im => { if (im && mio === richiesta) entrata.src = im.src; });
 }
 
-function vai(i, veloce) {
-  i = Math.max(0, Math.min(OGGI, i));
-  const cambia = i !== corrente;
-  corrente = i;
-  const f = fotogrammi[i];
-  tempo.style.setProperty("--colore-viaggio", f.colore);
+const testi = $("#p-testi");
+function scriviTesti(f) {
   pViaggio.textContent = f.titolo;
   pAnno.textContent = f.annoTesto;
   pRiga.textContent = f.riga;
@@ -720,11 +754,31 @@ function vai(i, veloce) {
   pFrase.hidden = !f.frase;
   pScheda.hidden = !f.scheda;
   if (f.scheda) pScheda.href = f.scheda;
+}
+// il testo tiene sempre lo spazio del viaggio più lungo, così la pagina sotto non salta
+function misuraTesti() {
+  testi.style.minHeight = "";
+  let alto = 0;
+  fotogrammi.forEach(f => { scriviTesti(f); alto = Math.max(alto, testi.offsetHeight); });
+  scriviTesti(fotogrammi[corrente]);
+  testi.style.minHeight = alto + "px";
+}
+
+function vai(i, modo) {
+  i = Math.max(0, Math.min(OGGI, i));
+  const verso = Math.sign(i - corrente), cambia = i !== corrente, veloce = modo === "lapse" || modo === "dito";
+  corrente = i;
+  const f = fotogrammi[i];
+  tempo.style.setProperty("--colore-viaggio", f.colore);
+  scriviTesti(f);
+  if (cambia && !veloce && !RIDUCI) testi.animate([{ opacity: 0, transform: `translateX(${verso * 14}px)` }, { opacity: 1, transform: "none" }], { duration: 300, easing: ESCI });
   cursore.style.left = posizioni[i] + "%";
   cursore.setAttribute("aria-valuenow", String(i));
   cursore.setAttribute("aria-valuetext", f.oggi ? "Oggi" : `${f.titolo}, ${f.annoTesto}, ${f.riga}`);
-  palco.classList.toggle("rapido", !!veloce);
-  if (cambia || !veloce) mostraFoto(f, veloce);
+  palco.classList.toggle("rapido", modo === "lapse");
+  palco.classList.toggle("sfoglia", modo === "dito");
+  if (modo === "gesto") adotta(f);
+  else if (cambia || !veloce) mostraFoto(f, modo, verso);
   if (!veloce) annuncio.textContent = f.oggi ? "Oggi" : `${f.titolo}, ${f.annoTesto}, ${f.riga}`;
 }
 
@@ -742,7 +796,7 @@ function lapse() {
   linea.classList.add("lapse");
   const passo = () => {
     if (i >= OGGI) { timerLapse = null; linea.classList.remove("lapse"); vai(OGGI, false); return; }
-    vai(i, true);
+    vai(i, "lapse");
     const t = i / OGGI;
     i++;
     timerLapse = setTimeout(passo, 55 + 175 * Math.pow(2 * t - 1, 2));
@@ -764,9 +818,9 @@ linea.addEventListener("pointerdown", e => {
   fermaLapse();
   linea.setPointerCapture(e.pointerId);
   linea.classList.add("trascina");
-  vai(indiceDa(e.clientX), true);
+  vai(indiceDa(e.clientX), "dito");
 });
-linea.addEventListener("pointermove", e => { if (linea.hasPointerCapture(e.pointerId)) vai(indiceDa(e.clientX), true); });
+linea.addEventListener("pointermove", e => { if (linea.hasPointerCapture(e.pointerId)) vai(indiceDa(e.clientX), "dito"); });
 const rilascia = e => {
   if (!linea.classList.contains("trascina")) return;
   linea.classList.remove("trascina");
@@ -782,17 +836,89 @@ cursore.addEventListener("keydown", e => {
   else if (e.key === "End") { e.preventDefault(); fermaLapse(); vai(OGGI, false); }
 });
 
-// scorrere la foto col dito: a sinistra avanti nel tempo, a destra indietro
-let x0 = null, y0 = 0;
-palco.addEventListener("pointerdown", e => { x0 = e.clientX; y0 = e.clientY; });
-palco.addEventListener("pointerup", e => {
-  if (x0 === null) return;
-  const dx = e.clientX - x0, dy = e.clientY - y0;
-  x0 = null;
-  if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.3) { fermaLapse(); vai(corrente + (dx < 0 ? 1 : -1), false); }
+// scorrere la foto col dito: la foto segue il dito e quella accanto entra dal lato; a sinistra avanti nel tempo
+let gesto = null;
+function srcPronta(f) {
+  const grande = "foto/" + f.foto, piccola = "foto/mini/" + f.foto;
+  if (pronte.has(grande)) return grande;
+  if (pronte.has(piccola) || !mancanti.has(piccola)) return piccola;
+  return null;
+}
+function trascinaFoto(dx) {
+  const w = palco.clientWidth, verso = dx < 0 ? 1 : -1, meta = corrente + verso;
+  const corr = strati[livello], vicino = strati[1 - livello];
+  if (meta < 0 || meta > OGGI) {
+    // in fondo alla linea del tempo la foto fa resistenza
+    if (gesto.verso) { vicino.classList.remove("is-on"); vicino.hidden = true; gesto.verso = 0; }
+    corr.style.transform = sposta(dx * .25, fotogrammi[corrente].alza);
+    return;
+  }
+  const f = fotogrammi[meta];
+  if (gesto.verso !== verso) {
+    gesto.verso = verso;
+    generazione[1 - livello]++;
+    const src = srcPronta(f);
+    if (src) { preparaStrato(vicino, src, f); vicino.classList.add("is-on"); }
+    else { vicino.classList.remove("is-on"); vicino.hidden = true; }
+  }
+  corr.style.transform = sposta(dx, fotogrammi[corrente].alza);
+  vicino.style.transform = sposta(dx + verso * w, f.alza);
+}
+palco.addEventListener("dragstart", e => e.preventDefault());
+palco.addEventListener("pointerdown", e => {
+  if (e.button > 0 || e.target.closest("a")) return;
+  gesto = { id: e.pointerId, x0: e.clientX, y0: e.clientY, xp: e.clientX, tp: e.timeStamp, vx: 0, verso: 0, attivo: false };
 });
-palco.addEventListener("pointercancel", () => { x0 = null; });
+palco.addEventListener("pointermove", e => {
+  if (!gesto || e.pointerId !== gesto.id) return;
+  const dx = e.clientX - gesto.x0, dy = e.clientY - gesto.y0;
+  if (!gesto.attivo) {
+    if (Math.abs(dy) > 10 && Math.abs(dy) > Math.abs(dx)) { gesto = null; return; }
+    if (Math.abs(dx) < 8) return;
+    gesto.attivo = true;
+    fermaLapse();
+    palco.setPointerCapture(e.pointerId);
+    palco.classList.remove("scorre");
+    palco.classList.add("trascina");
+  }
+  if (e.timeStamp > gesto.tp) gesto.vx = (e.clientX - gesto.xp) / (e.timeStamp - gesto.tp);
+  gesto.xp = e.clientX;
+  gesto.tp = e.timeStamp;
+  if (!RIDUCI) trascinaFoto(dx);
+});
+function lascia(e, annulla) {
+  if (!gesto || e.pointerId !== gesto.id) return;
+  const g = gesto;
+  gesto = null;
+  if (!g.attivo) return;
+  palco.classList.remove("trascina");
+  if (palco.hasPointerCapture(e.pointerId)) palco.releasePointerCapture(e.pointerId);
+  const w = palco.clientWidth, dx = e.clientX - g.x0, verso = dx < 0 ? 1 : -1, meta = corrente + verso;
+  // si passa al viaggio accanto se il dito ha percorso un quinto della foto o l'ha lanciata
+  const passa = !annulla && meta >= 0 && meta <= OGGI && (Math.abs(dx) > w * .2 || (Math.abs(g.vx) > .3 && Math.sign(g.vx) === Math.sign(dx)));
+  if (RIDUCI) { if (passa) vai(meta); return; }
+  const corr = strati[livello], vicino = strati[1 - livello];
+  palco.classList.add("scorre");
+  if (passa && g.verso === verso) {
+    corr.style.transform = sposta(-verso * w, fotogrammi[corrente].alza);
+    vicino.style.transform = sposta(0, fotogrammi[meta].alza);
+    vai(meta, "gesto");
+    return;
+  }
+  corr.style.transform = sposta(0, fotogrammi[corrente].alza);
+  if (g.verso) vicino.style.transform = sposta(g.verso * w, fotogrammi[corrente + g.verso].alza);
+  const gen = generazione[1 - livello];
+  setTimeout(() => {
+    palco.classList.remove("scorre");
+    if (generazione[1 - livello] === gen) { vicino.classList.remove("is-on"); vicino.hidden = true; vicino.style.transform = ""; }
+  }, 340);
+}
+palco.addEventListener("pointerup", e => lascia(e, false));
+palco.addEventListener("pointercancel", e => lascia(e, true));
 
+misuraTesti();
+let misura = 0;
+addEventListener("resize", () => { cancelAnimationFrame(misura); misura = requestAnimationFrame(misuraTesti); });
 vai(OGGI, false);
 document.addEventListener("visibilitychange", () => { if (document.visibilityState !== "visible") fermaLapse(); });
 })();
