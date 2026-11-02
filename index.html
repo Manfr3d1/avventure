@@ -1,0 +1,801 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Manfredi Tocci, coordinatore Avventure nel Mondo</title>
+<meta name="description" content="12 viaggi con Avventure nel Mondo dal 2019, 5 da coordinatore. Le prossime partenze e come scrivermi.">
+<!-- fuori da Google finché non c'è il sito personale: togliere questa riga quando si vuole essere trovati -->
+<meta name="robots" content="noindex">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f2f2f7" media="(prefers-color-scheme: light)">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Manfredi Tocci, coordinatore Avventure nel Mondo">
+<meta property="og:description" content="I viaggi fatti, le prossime partenze e come scrivermi.">
+<meta property="og:url" content="https://manfreditocci.it/avventure/">
+<meta property="og:image" content="https://manfreditocci.it/avventure/foto/anteprima.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Manfredi Tocci, coordinatore di Avventure nel Mondo">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%23000'/%3E%3Ccircle cx='32' cy='32' r='11' fill='%23ffd60a'/%3E%3C/svg%3E">
+<style>
+:root{
+  color-scheme:dark light;
+  --sfondo:#000;
+  --scheda:#1c1c1e;
+  --scheda-2:#2c2c2e;
+  --sep:rgba(84,84,88,.65);
+  --testo:#fff;
+  --testo-2:rgba(235,235,245,.64);
+  --giallo:#ffd60a;
+  --giallo-testo:#ffd60a;
+  --verde:#30d158;
+  --blu:#0a84ff;
+  --oggi:#2c2c2e;
+  --tinta:rgba(255,255,255,.12);
+  --font:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --font-titoli:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --ease-out:cubic-bezier(.23,1,.32,1);
+  --ease-in-out:cubic-bezier(.77,0,.175,1);
+}
+@media (prefers-color-scheme:light){
+  :root{
+    --sfondo:#f2f2f7;
+    --scheda:#fff;
+    --scheda-2:#e5e5ea;
+    --sep:rgba(60,60,67,.24);
+    --testo:#000;
+    --testo-2:rgba(60,60,67,.74);
+    --giallo:#ffcc00;
+    --giallo-testo:#8a6100;
+    --verde:#248a3d;
+    --blu:#0063cc;
+    --oggi:#3a3a3c;
+    --tinta:rgba(0,0,0,.06);
+  }
+}
+*,*::before,*::after{box-sizing:border-box}
+*{margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;background:var(--sfondo)}
+body{min-height:100vh;background:var(--sfondo);color:var(--testo);font:400 17px/1.47 var(--font);letter-spacing:-.01em;-webkit-font-smoothing:antialiased;accent-color:var(--giallo)}
+::selection{background:var(--giallo);color:#000}
+:focus-visible{outline:3px solid var(--blu);outline-offset:3px;border-radius:8px}
+a{color:inherit;text-decoration:none}
+img{display:block}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
+[hidden]{display:none!important}
+.pagina{max-width:520px;margin:0 auto;padding-bottom:calc(112px + env(safe-area-inset-bottom))}
+
+/* ritratto nel tempo */
+.tempo{--colore-viaggio:var(--oggi)}
+.palco{position:relative;width:100%;aspect-ratio:4/5;max-height:66vh;max-height:66svh;overflow:hidden;background:var(--colore-viaggio);transition:background-color .5s var(--ease-out);touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.scatto{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .2s var(--ease-out)}
+.scatto.is-on{opacity:1}
+.palco.rapido .scatto{transition:none}
+/* la foto sfuma nel colore del viaggio: foto e pannello sono una superficie sola */
+.palco::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(to top,rgba(0,0,0,.5),rgba(0,0,0,0) 48%);background:linear-gradient(to top,var(--colore-viaggio) 0%,color-mix(in srgb,var(--colore-viaggio) 60%,transparent) 24%,transparent 52%)}
+.palco.senza-foto::after{display:none}
+.palco-titolo{position:absolute;left:20px;right:20px;top:42%;transform:translateY(-50%);color:rgba(255,255,255,.6);font:300 clamp(48px,15vw,88px)/.95 var(--font-titoli);letter-spacing:-.035em;text-wrap:balance;opacity:0;transition:opacity .2s var(--ease-out)}
+.palco.senza-foto .palco-titolo{opacity:1}
+.numero{display:block;color:#fff;font:200 clamp(104px,34vw,168px)/.82 var(--font-titoli);letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.numero-testo{display:block;margin-top:14px;color:rgba(255,255,255,.78);font:500 17px/1.3 var(--font);letter-spacing:-.01em}
+.firma{position:absolute;z-index:2;left:20px;right:20px;bottom:18px;color:#fff}
+.firma h1{font:800 clamp(34px,10vw,54px)/1.02 var(--font-titoli);letter-spacing:-.03em}
+.firma p{margin-top:6px;font-size:15px;color:rgba(255,255,255,.86)}
+.codice{font-variant-numeric:tabular-nums;white-space:nowrap}
+.firma a,.pannello-scheda{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;text-decoration-color:rgba(255,255,255,.55)}
+.pannello{background:var(--colore-viaggio);color:#fff;padding:14px 20px 16px;transition:background-color .5s var(--ease-out)}
+.pannello-riga{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.pannello-viaggio{font:700 28px/1.1 var(--font-titoli);letter-spacing:-.025em}
+.pannello-anno{font:300 28px/1.1 var(--font-titoli);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.pannello-riga2{margin-top:4px;font-size:15px;color:rgba(255,255,255,.84);text-wrap:pretty}
+.pannello-frase{margin-top:12px;font-size:17px;line-height:1.36;text-wrap:pretty}
+.pannello-scheda{display:inline-block;margin-top:12px;font-size:15px;font-weight:600;color:#fff}
+.linea{position:relative;height:46px;margin-top:14px;touch-action:none;cursor:grab;user-select:none;-webkit-user-select:none}
+.linea.trascina{cursor:grabbing}
+.binario{position:absolute;left:0;right:0;top:15px;height:3px;border-radius:2px;background:rgba(255,255,255,.34)}
+.futuro{position:absolute;top:15px;height:3px;background-image:radial-gradient(circle,rgba(255,255,255,.7) 1.2px,transparent 1.6px);background-size:7px 3px}
+.tacca{position:absolute;top:9px;width:3px;height:15px;margin-left:-1.5px;border-radius:2px;background:rgba(255,255,255,.9);pointer-events:none}
+.tacca.coord{background:var(--giallo)}
+.tacca-futura{position:absolute;top:6px;width:21px;height:21px;margin-left:-10.5px;border-radius:50%;display:grid;place-items:center}
+.tacca-futura::before{content:"";width:9px;height:9px;border-radius:50%;border:2px solid var(--giallo);background:var(--colore-viaggio)}
+.cursore{position:absolute;top:5px;width:23px;height:23px;margin-left:-11.5px;border-radius:50%;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.35);transition:left .22s var(--ease-out);touch-action:none}
+.cursore:focus-visible{outline-offset:1px;border-radius:50%}
+.linea.trascina .cursore,.linea.lapse .cursore{transition:left .08s linear}
+.etichetta{position:absolute;top:29px;transform:translateX(-50%);font-size:12px;line-height:1;color:rgba(255,255,255,.74);font-variant-numeric:tabular-nums;white-space:nowrap;pointer-events:none}
+.etichetta.prima{transform:none}
+.etichetta.futura{color:var(--giallo)}
+.istruzione{margin-top:2px;font-size:13px;color:rgba(255,255,255,.74)}
+
+/* bio */
+.bio{padding:26px 20px 0}
+.bio-attacco{font:600 22px/1.3 var(--font-titoli);letter-spacing:-.02em;text-wrap:pretty}
+.bio-resto{margin-top:12px;color:var(--testo-2);text-wrap:pretty}
+
+/* sezioni */
+.sezione{padding:0 16px;margin-top:40px}
+.sezione h2{padding:0 4px;font:700 22px/1.2 var(--font-titoli);letter-spacing:-.025em}
+.sezione-nota{padding:0 4px;margin-top:4px;font-size:15px;color:var(--testo-2)}
+
+/* tabellone */
+.tabellone{list-style:none;margin-top:12px;display:grid;gap:12px}
+.partenza{position:relative;isolation:isolate;background:var(--scheda);border-radius:22px;padding:0 16px}
+/* foto del posto dietro il tabellone, con un velo scuro per leggere palette e testi (anche in tema chiaro) */
+.p-sfondo{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;border-radius:22px}
+.partenza.con-foto{background:#1c1c1e;color:#fff;--testo:#fff;--testo-2:rgba(235,235,245,.8);--verde:#30d158;--giallo-testo:#ffd60a;--tinta:rgba(255,255,255,.18);--scheda-2:rgba(255,255,255,.18)}
+.partenza.con-foto::before{content:"";position:absolute;inset:0;z-index:-1;border-radius:22px;background:linear-gradient(to bottom,rgba(0,0,0,.18),rgba(0,0,0,.4) 42%,rgba(0,0,0,.8))}
+.con-foto .p-quanto,.con-foto .p-quando,.con-foto .p-posti,.con-foto .p-stato{text-shadow:0 1px 3px rgba(0,0,0,.65)}
+.p-link{display:block;padding:16px 0 14px;-webkit-tap-highlight-color:transparent}
+.p-link:only-child{padding-bottom:17px}
+/* tutta la scheda porta al programma, il pulsante Iscriviti sta sopra e porta alla prenotazione */
+.p-link::after{content:"";position:absolute;inset:0;border-radius:22px}
+.p-azioni{position:relative;z-index:1;display:flex;flex-wrap:wrap;gap:8px;padding:0 0 16px}
+.p-iscriviti{display:inline-flex;align-items:center;height:36px;padding:0 16px;border-radius:999px;background:var(--tinta);color:var(--testo);font:600 15px/1 var(--font);-webkit-tap-highlight-color:transparent;transition:transform .16s var(--ease-out)}
+.p-iscriviti:active{transform:scale(.97)}
+.p-info{gap:7px}
+.p-info svg{width:17px;height:17px}
+.p-testa{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.p-data{font:600 15px/1 var(--font);font-variant-numeric:tabular-nums}
+.p-quanto{display:inline-flex;align-items:center;gap:4px;font:600 15px/1 var(--font);color:var(--testo-2);font-variant-numeric:tabular-nums;transition:color .15s ease}
+.p-quanto.presto{color:var(--giallo-testo)}
+.p-quanto svg{width:17px;height:17px}
+.p-nome{display:block;margin-top:10px;font:700 21px/1.2 var(--font-titoli);letter-spacing:-.02em}
+.p-piede{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px 12px;margin-top:12px}
+.p-quando{font-size:15px;color:var(--testo-2);font-variant-numeric:tabular-nums}
+.p-nome .flaps{display:flex}
+.p-nome .flaps+.flaps{margin-top:3px}
+.p-posti{display:flex;align-items:center;flex-wrap:wrap;gap:6px 10px;margin-top:10px;font-size:15px;color:var(--testo-2);font-variant-numeric:tabular-nums}
+.posti{display:inline-flex;flex-wrap:wrap;gap:3px}
+.posti i{width:8px;height:8px;border-radius:50%;box-shadow:inset 0 0 0 1.5px var(--testo-2)}
+.posti i.preso{background:var(--testo);box-shadow:none}
+.p-nota{display:block;margin-top:10px;font-size:15px;line-height:1.4;color:var(--testo-2);text-wrap:pretty}
+.p-stato{display:inline-flex;align-items:center;gap:7px;font:600 14px/1 var(--font);white-space:nowrap}
+.p-stato::before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor}
+.p-stato.is-ok{color:var(--verde)}
+.p-stato.is-quasi{background:var(--giallo);color:#000;padding:7px 11px;border-radius:999px}
+.p-stato.is-pieno{background:var(--scheda-2);color:var(--testo-2);padding:7px 11px;border-radius:999px}
+.p-stato.is-forma{color:var(--testo-2)}
+.p-stato.is-forma::before{background:transparent;box-shadow:inset 0 0 0 2px currentColor}
+@media (hover:hover) and (pointer:fine){.p-link:hover .p-quanto{color:var(--testo)}}
+
+/* palette che girano: due metà fisse, due fogli che ruotano sul cardine */
+.flaps{display:inline-flex;gap:2px}
+.flap{position:relative;display:inline-block;width:1.04em;height:1.42em;color:#f5f5f7;font:700 17px/1 var(--font-titoli);perspective:5em;--flap-a:#3a3a3c;--flap-b:#2c2c2e}
+@media (prefers-color-scheme:light){.flap{--flap-a:#2c2c2e;--flap-b:#1c1c1e}}
+.flaps.grande .flap{font-size:clamp(19px,6.1vw,25px)}
+.mezza,.foglia{position:absolute;left:0;right:0;height:50%;overflow:hidden;-webkit-backface-visibility:hidden;backface-visibility:hidden}
+.flap .su{top:0;border-radius:4px 4px 0 0;background:var(--flap-a)}
+.flap .giu{bottom:0;border-radius:0 0 4px 4px;background:var(--flap-b)}
+.foglia{visibility:hidden;z-index:2}
+.foglia.su{transform-origin:50% 100%}
+.foglia.giu{transform-origin:50% 0}
+.flap i{position:absolute;left:0;right:0;height:200%;display:grid;place-items:center;font-style:normal}
+.flap .su i{top:0}
+.flap .giu i{bottom:0}
+.flap::after{content:"";position:absolute;z-index:3;left:0;right:0;top:calc(50% - .5px);height:1px;background:rgba(0,0,0,.6)}
+
+/* viaggi fatti */
+.griglia{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:12px}
+.tessera{position:relative;display:block;width:100%;aspect-ratio:3/4;border-radius:14px;overflow:hidden;background:var(--c,var(--scheda-2));-webkit-tap-highlight-color:transparent;transition:transform .16s var(--ease-out)}
+.tessera:active{transform:scale(.97)}
+.tessera img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.didascalia{position:absolute;left:0;right:0;bottom:0;padding:26px 9px 8px;color:#fff;font-size:13px;line-height:1.2}
+.tessera:has(img) .didascalia{background:linear-gradient(to top,rgba(0,0,0,.62),rgba(0,0,0,0))}
+.tessera b{display:block;font:700 14px/1.15 var(--font-titoli);letter-spacing:-.01em;text-wrap:balance}
+.tessera .anno{display:inline-flex;align-items:center;gap:5px;margin-top:2px;color:rgba(255,255,255,.84);font-variant-numeric:tabular-nums}
+.ruolo{position:absolute;z-index:1;top:8px;left:8px;padding:5px 8px;border-radius:999px;background:var(--giallo);color:#000;font:700 11px/1 var(--font);letter-spacing:0}
+.griglia .frase{display:none}
+
+/* contatti: schede separate, icona colorata come nelle impostazioni di iOS, piccola azione a destra */
+.contatti{list-style:none;display:grid;gap:10px;margin-top:12px}
+.contatto{display:flex;align-items:center;gap:14px;min-height:70px;padding:12px 14px;background:var(--scheda);border-radius:18px;-webkit-tap-highlight-color:transparent;transition:transform .16s var(--ease-out)}
+.contatto:active{transform:scale(.985)}
+.contatto-icona{flex:none;display:grid;place-items:center;width:40px;height:40px;border-radius:11px;background:var(--i);color:#fff}
+.contatto-icona svg{width:22px;height:22px}
+.contatto .testi{flex:1;min-width:0}
+.contatto b{display:block;font-weight:600;font-size:17px}
+.contatto small{display:block;font-size:14px;line-height:1.35;color:var(--testo-2);overflow-wrap:anywhere}
+.contatto-cta{flex:none;display:inline-flex;align-items:center;height:32px;padding:0 14px;border-radius:999px;background:var(--tinta);color:var(--testo);font:600 14px/1 var(--font)}
+.contatto-cta.is-giallo{background:var(--giallo);color:#000}
+
+/* piede */
+.piede{padding:44px 20px 0}
+.piede-motto{font:700 22px/1.3 var(--font-titoli);letter-spacing:-.025em;text-wrap:balance}
+.piede p+p{margin-top:8px;font-size:14px;color:var(--testo-2);max-width:40ch}
+.piede .crediti{font-size:12px;max-width:52ch}
+.crediti a{text-decoration:underline;text-underline-offset:2px}
+
+/* azioni fisse, con una sfumatura sotto perché il testo non si veda dietro */
+.azioni{position:fixed;z-index:20;left:16px;right:16px;bottom:calc(14px + env(safe-area-inset-bottom));max-width:488px;margin:0 auto;display:flex;gap:10px}
+.azioni::before{content:"";position:absolute;z-index:-1;left:-16px;right:-16px;bottom:calc(-14px - env(safe-area-inset-bottom));height:calc(100% + 56px + env(safe-area-inset-bottom));background:linear-gradient(to top,var(--sfondo) 58%,transparent);pointer-events:none}
+.azione{flex:1;display:flex;align-items:center;justify-content:center;gap:10px;height:56px;border-radius:18px;background:var(--giallo);color:#000;font:600 17px/1 var(--font);box-shadow:0 10px 30px rgba(0,0,0,.28);-webkit-tap-highlight-color:transparent;transition:transform .16s var(--ease-out)}
+.azione svg{width:22px;height:22px}
+.azione:active{transform:scale(.97)}
+.azione-ig{flex:none;width:56px;background:var(--scheda-2);color:var(--testo)}
+
+@media (min-width:560px){
+  .tempo{margin-top:24px;border-radius:28px;overflow:hidden}
+}
+@media (prefers-reduced-motion:reduce){
+  .palco,.pannello,.cursore,.tessera,.azione{transition-duration:.01ms}
+  .scatto{transition:opacity .12s ease}
+}
+</style>
+</head>
+<body>
+<main class="pagina" id="pagina">
+
+  <section class="tempo" id="tempo" aria-labelledby="nome">
+    <div class="palco" id="palco">
+      <img class="scatto is-on" id="scatto-a" src="foto/hero.jpg" alt="Manfredi oggi" fetchpriority="high" onerror="this.classList.remove('is-on');this.hidden=true;this.closest('.palco').classList.add('senza-foto')">
+      <p class="palco-titolo" id="palco-titolo" aria-hidden="true"></p>
+      <div class="firma">
+        <h1 id="nome">Manfredi Tocci</h1>
+        <p>Coordinatore di <a href="https://www.viaggiavventurenelmondo.it/" target="_blank" rel="noopener">Avventure nel Mondo</a>, <span class="codice">cod. 3032</span></p>
+      </div>
+    </div>
+    <div class="pannello" id="pannello">
+      <div class="pannello-riga">
+        <p class="pannello-viaggio" id="p-viaggio">Oggi</p>
+        <p class="pannello-anno" id="p-anno">2026</p>
+      </div>
+      <p class="pannello-riga2" id="p-riga">12 viaggi con Avventure nel Mondo, 5 da coordinatore.</p>
+      <p class="pannello-frase" id="p-frase" hidden></p>
+      <a class="pannello-scheda" id="p-scheda" href="https://www.viaggiavventurenelmondo.it/" target="_blank" rel="noopener" hidden>Scheda del viaggio</a>
+      <div class="linea" id="linea" hidden></div>
+      <p class="istruzione" id="istruzione" hidden>Trascina per sfogliare i viaggi</p>
+    </div>
+    <p class="sr" id="annuncio" aria-live="polite"></p>
+  </section>
+
+  <section class="bio" aria-label="Chi sono">
+    <p class="bio-attacco">Sono un partecipante come gli altri, solo con qualche pensiero in più.</p>
+    <p class="bio-resto">Mi piacciono i posti più wild e autentici e le giornate intense con la sveglia presto, anche a discapito della comodità. Il gruppo fa il 90% dell'esperienza: spirito di adattamento, rispetto, puntualità e ironia (e non solo…). Mi piace raccontare il viaggio con foto e video.</p>
+  </section>
+
+  <!-- PARTENZE: una riga <li> per partenza. Dal giorno della partenza passa da sola tra i viaggi fatti.
+       data-tabellone: righe del tabellone separate da "/", massimo 11 caratteri per riga (es. "GUATEMALA/DISCOVERY").
+       data-iscritti, data-max, data-minimo (di solito 3) decidono l'etichetta come sul sito AvM:
+       Completo, Quasi completo (3 posti o meno), Confermato, altrimenti "Si parte con 3 iscritti".
+       data-partenza è il codice completo AvM, serve all'aggiornamento automatico degli iscritti. -->
+  <section class="sezione" id="partenze" aria-labelledby="t-partenze">
+    <h2 id="t-partenze">Prossime partenze</h2>
+    <ul class="tabellone" id="tabellone">
+      <li class="partenza con-foto" data-partenza="2026-2580" data-titolo="Guatemala Discovery" data-breve="Guatemala" data-tabellone="GUATEMALA/DISCOVERY" data-dal="2026-11-06" data-al="2026-11-17" data-cod="2580" data-iscritti="5" data-max="15" data-minimo="3" data-foto="guatemala.jpg" style="--c:#2f5e4e">
+        <img class="p-sfondo" src="foto/partenze/guatemala.jpg" alt="" loading="lazy" onerror="this.parentNode.classList.remove('con-foto');this.remove()">
+        <a class="p-link" href="https://www.viaggiavventurenelmondo.it/viaggi/9712" target="_blank" rel="noopener">
+          <span class="p-testa"><span class="p-data">6 nov</span><span class="p-quanto"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></span></span>
+          <span class="p-nome">Guatemala Discovery</span>
+          <span class="p-piede"><span class="p-quando">Dal 6 al 17 novembre 2026, cod. 2580</span></span>
+          <span class="p-posti">5 iscritti su 15</span>
+          <span class="sr">Apri la scheda del viaggio sul sito di Avventure.</span>
+        </a>
+        <div class="p-azioni"><a class="p-iscriviti" href="https://www.viaggiavventurenelmondo.it/live/book#t=apfkybfwshkae" target="_blank" rel="noopener" aria-label="Iscriviti al Guatemala Discovery del 6 novembre, sul sito di Avventure">Iscriviti</a><a class="p-iscriviti p-info" href="https://wa.me/393935015025?text=Ciao%20Manfredi%2C%20vorrei%20info%20sul%20Guatemala%20Discovery%20del%206%20novembre%20%28cod.%202580%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 11.6a8.6 8.6 0 0 1-12.7 7.6L3.5 20.5l1.3-4.1a8.6 8.6 0 1 1 15.7-4.8Z"/></svg>Scrivimi per info</a></div>
+      </li>
+      <li class="partenza con-foto" data-partenza="2026-0458" data-titolo="Thai Isole Discovery" data-breve="Thai Isole" data-tabellone="THAI ISOLE/DISCOVERY" data-dal="2026-12-18" data-al="2027-01-02" data-cod="0458" data-iscritti="0" data-max="7" data-minimo="3" data-foto="thailandia.jpg" style="--c:#0e6a80">
+        <img class="p-sfondo" src="foto/partenze/thai.jpg" alt="" loading="lazy" onerror="this.parentNode.classList.remove('con-foto');this.remove()">
+        <a class="p-link" href="https://www.viaggiavventurenelmondo.it/viaggi/9570" target="_blank" rel="noopener">
+          <span class="p-testa"><span class="p-data">18 dic</span><span class="p-quanto"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></span></span>
+          <span class="p-nome">Thai Isole Discovery</span>
+          <span class="p-piede"><span class="p-quando">Dal 18 dicembre 2026 al 2 gennaio 2027, cod. 0458</span></span>
+          <span class="p-posti">0 iscritti su 7</span>
+          <span class="sr">Apri la scheda del viaggio sul sito di Avventure.</span>
+        </a>
+        <div class="p-azioni"><a class="p-iscriviti" href="https://www.viaggiavventurenelmondo.it/live/book#t=o8gpudz3b83de" target="_blank" rel="noopener" aria-label="Iscriviti al Thai Isole Discovery del 18 dicembre, sul sito di Avventure">Iscriviti</a><a class="p-iscriviti p-info" href="https://wa.me/393935015025?text=Ciao%20Manfredi%2C%20vorrei%20info%20sul%20Thai%20Isole%20Discovery%20del%2018%20dicembre%20%28cod.%200458%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 11.6a8.6 8.6 0 0 1-12.7 7.6L3.5 20.5l1.3-4.1a8.6 8.6 0 1 1 15.7-4.8Z"/></svg>Scrivimi per info</a></div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- VIAGGI FATTI, dal più vecchio. Per aggiungerne uno copia una riga <li> e cambia i dati.
+       data-ruolo: "coord" o "pax". Foto: foto/<nome>.jpg (grande) e foto/mini/<nome>.jpg (piccola).
+       --c è il colore di riserva quando manca la foto; con la foto si prende la tinta più accesa della foto.
+       data-colore-fisso (facoltativo) usa sempre --c: serve quando due viaggi vicini verrebbero dello stesso colore.
+       data-alza="17" (facoltativo) alza la foto grande del 17% se tu sei troppo in basso e finisci sotto il nome.
+       La frase va solo se è tua, testuale. -->
+  <section class="sezione" aria-labelledby="t-fatti">
+    <h2 id="t-fatti">Dove sono già stato</h2>
+    <ol class="griglia" id="griglia">
+      <li data-scheda="9315" data-ruolo="pax" data-anno="2019" data-titolo="Islanda Discovery" data-breve="Islanda" data-foto="islanda.jpg" style="--c:#3d4f63"><a class="tessera" href="https://www.viaggiavventurenelmondo.it/viaggi/9315" target="_blank" rel="noopener"><img src="foto/mini/islanda.jpg" alt="" loading="lazy" onerror="this.remove()"><span class="didascalia"><b>Islanda Discovery</b><span class="anno">2019</span><span class="sr">, da partecipante. Scheda del viaggio.</span></span></a></li>
+      <li data-scheda="9318" data-ruolo="pax" data-anno="2022" data-titolo="Lofoten Aurore Boreali Discovery" data-breve="Lofoten" data-foto="lofoten.jpg" style="--c:#1f5a4f"><a class="tessera" href="https://www.viaggiavventurenelmondo.it/viaggi/9318" target="_blank" rel="noopener"><img src="foto/mini/lofoten.jpg" alt="" loading="lazy" onerror="this.remove()"><span class="didascalia"><b>Lofoten Aurore Boreali Discovery</b><span class="anno">2022</span><span class="sr">, da partecipante. Scheda del viaggio.</span></span></a></li>
+      <li data-scheda="9420" data-ruolo="pax" data-anno="2022" data-titolo="Kalahari Botswana Discovery" data-breve="Kalahari" data-foto="kalahari.jpg" style="--c:#8a5a1c"><a class="tessera" href="https://www.viaggiavventurenelmondo.it/viaggi/9420" target="_blank" rel="noopener"><img src="foto/mini/kalahari.jpg" alt="" loading="lazy" onerror="this.remove()"><span class="didascalia"><b>Kalahari Botswana Discovery</b><span class="anno">2022</span><span class="sr">, da partecipante. Scheda del viaggio.</span></span></a></li>
+      <li data-scheda="9505" data-ruolo="pax" data-anno="2023" data-titolo="Delhi Varanasi Discovery" data-breve="Varanasi" data-foto="varanasi.jpg" style="--c:#a8461b"><a class="tessera" href="https://www.viaggiavventurenelmondo.it/viaggi/9505" target="_blank" rel="noopener"><img src="foto/mini/varanasi.jpg" alt="" loading="lazy" onerror="this.remove()"><span class="didascalia"><b>Delhi Varanasi Discovery</b><span class="anno">2023</span><span class="sr">, da partecipante. Scheda del viaggio.</span></span></a></li>
+      <li data-scheda="9772" data-alza="10" data-colore-fisso data-ruolo="pax" data-anno="2023" data-titolo="Maranhão Brasile Discovery" data-breve="Maranhão" data-foto="maranhao.jpg" style="--c:hsl(185 60% 22%)"><a class="tessera" href="https://www.viaggiavventurenelmondo.it/viaggi/9772" target="_blank" rel="noopener"><img src="foto/mini/maranhao.jpg" alt="" loading="lazy" onerror="this.remove()"><span class="didascalia"><b>Maranhão Brasile Discovery</b><span class="anno">2023</span><span class="sr">, da partecipante. Scheda del viaggio.</span></span></a></li>
+      <li data-scheda="9455" data-ruolo="pax" data-anno="2024" data-titolo="Namibia Discovery" data-breve="Namibia" data-foto="namibia.jpg" style="--c:#9c3a1f"><a class="tessera" href="https://www.viaggiavventurenelmondo.it/viaggi/9455" target="_blank" rel="noopener"><img src="foto/mini/namibia.jpg" alt="" loading="lazy" onerror="this.remove()"><span class="didascalia"><b>Namibia Discovery</b><span class="anno">2024</span><span class="sr">, da partecipante. Scheda del viaggio.</span></span></a></li>
+      <li data-scheda="9325" data-ruolo="pax" data-anno="2024" data-titolo="Cappadocia Discovery" data-breve="Cappadocia" data-foto="cappadocia.jpg" style="--c:#8a4a5e"><a class="tessera" href="https://www.viaggiavventurenelmondo.it/viaggi/9325" target="_blank" rel="noopener"><img src="foto/mini/cappadocia.jpg" alt="" loading="lazy" onerror="this.remove()"><span class="didascalia"><b>Cappadocia Discovery</b><span class="anno">2024</span><span class="sr">, da partecipante. Scheda del viaggio.</span></span></a></li>
+      <li data-scheda="9380" class="coord" data-ruolo="coord" data-anno="2025" data-titolo="Marocco Discovery" data-breve="Marocco" data-foto="marocco.jpg" style="--c:#2b4dab"><a class="tessera" href="https://www.viaggiavventurenelmondo.it/viaggi/9380" target="_blank" rel="noopener"><img src="foto/mini/marocco.jpg" alt="" loading="lazy" onerror="this.remove()"><span class="ruolo" aria-hidden="true">Coordinatore</span><span class="didascalia"><b>Marocco Discovery</b><span class="anno">2025</span><span class="sr">, da coordinatore. Scheda del viaggio.</span></span></a><blockquote class="frase">Partendo a fine luglio aspettiamoci TANTO CALDO. Si suda, ma si vive.</blockquote></li>
+      <li data-scheda="9410" class="coord" data-ruolo="coord" data-anno="2025" data-titolo="Zanzibar Express Discovery" data-breve="Zanzibar" data-foto="zanzibar.jpg" style="--c:#0c6b70"><a class="tessera" href="https://www.viaggiavventurenelmondo.it/viaggi/9410" target="_blank" rel="noopener"><img src="foto/mini/zanzibar.jpg" alt="" loading="lazy" onerror="this.remove()"><span class="ruolo" aria-hidden="true">Coordinatore</span><span class="didascalia"><b>Zanzibar Express Discovery</b><span class="anno">2025</span><span class="sr">, da coordinatore. Scheda del viaggio.</span></span></a><blockquote class="frase">Pemba non si può saltare.</blockquote></li>
+      <li data-scheda="9720" class="coord" data-ruolo="coord" data-anno="2025" data-titolo="Cuba Express Discovery" data-breve="Cuba" data-foto="cuba.jpg" style="--c:#6b3e8c"><a class="tessera" href="https://www.viaggiavventurenelmondo.it/viaggi/9720" target="_blank" rel="noopener"><img src="foto/mini/cuba.jpg" alt="" loading="lazy" onerror="this.remove()"><span class="ruolo" aria-hidden="true">Coordinatore</span><span class="didascalia"><b>Cuba Express Discovery</b><span class="anno">2025</span><span class="sr">, da coordinatore. Scheda del viaggio.</span></span></a><blockquote class="frase">Meglio saperlo ora, che nel mezzo di un blackout a Trinidad.</blockquote></li>
+      <li data-scheda="9780" data-colore-fisso class="coord" data-ruolo="coord" data-anno="2026" data-dal="2026-07-25" data-al="2026-08-10" data-cod="1364" data-titolo="Perù Discovery" data-breve="Perù" data-foto="peru.jpg" style="--c:hsl(110 60% 21%)"><a class="tessera" href="https://www.viaggiavventurenelmondo.it/viaggi/9780" target="_blank" rel="noopener"><img src="foto/mini/peru.jpg" alt="" loading="lazy" onerror="this.remove()"><span class="ruolo" aria-hidden="true">Coordinatore</span><span class="didascalia"><b>Perù Discovery</b><span class="anno">2026</span><span class="sr">, da coordinatore. Scheda del viaggio.</span></span></a><blockquote class="frase">L'altitudine sarà il diciassettesimo membro del gruppo, non sempre simpatico.</blockquote></li>
+      <li data-scheda="9603" class="coord" data-ruolo="coord" data-anno="2026" data-dal="2026-08-14" data-al="2026-08-29" data-cod="3391" data-titolo="Giava Bali Gili Discovery" data-breve="Giava Bali" data-foto="giava.jpg" style="--c:#2f6b34"><a class="tessera" href="https://www.viaggiavventurenelmondo.it/viaggi/9603" target="_blank" rel="noopener"><img src="foto/mini/giava.jpg" alt="" loading="lazy" onerror="this.remove()"><span class="ruolo" aria-hidden="true">Coordinatore</span><span class="didascalia"><b>Giava Bali Gili Discovery</b><span class="anno">2026</span><span class="sr">, da coordinatore. Scheda del viaggio.</span></span></a></li>
+    </ol>
+  </section>
+
+  <section class="sezione" aria-labelledby="t-contatti">
+    <h2 id="t-contatti">Contatti</h2>
+    <ul class="contatti">
+      <li><a class="contatto" href="https://wa.me/393935015025?text=Ciao%20Manfredi%2C%20ti%20scrivo%20per%20un%20viaggio" target="_blank" rel="noopener">
+        <span class="contatto-icona" style="--i:#25d366"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 11.6a8.6 8.6 0 0 1-12.7 7.6L3.5 20.5l1.3-4.1a8.6 8.6 0 1 1 15.7-4.8Z"/></svg></span>
+        <span class="testi"><b>WhatsApp</b><small>Per qualsiasi domanda prima di iscriverti</small></span>
+        <span class="contatto-cta is-giallo">Scrivimi</span></a></li>
+      <li><a class="contatto" href="https://ig.me/m/manfredi.jpg" target="_blank" rel="noopener">
+        <span class="contatto-icona" style="--i:#e1306c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".6" fill="currentColor"/></svg></span>
+        <span class="testi"><b>Instagram</b><small>Se preferisci scrivermi in direct</small></span>
+        <span class="contatto-cta">Scrivimi</span></a></li>
+      <li><a class="contatto" href="mailto:info@manfreditocci.it">
+        <span class="contatto-icona" style="--i:#0a84ff"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7 8 6 8-6"/></svg></span>
+        <span class="testi"><b>Email</b><small>info@manfreditocci.it</small></span>
+        <span class="contatto-cta">Scrivimi</span></a></li>
+    </ul>
+  </section>
+
+  <section class="sezione" aria-labelledby="t-prima">
+    <h2 id="t-prima">Prima di partire</h2>
+    <ul class="contatti">
+      <li><a class="contatto" href="https://www.viaggiavventurenelmondo.it/info/decalogo" target="_blank" rel="noopener">
+        <span class="contatto-icona" style="--i:#ff9f0a"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5v-15Z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19"/></svg></span>
+        <span class="testi"><b>Il Decalogo di Avventure</b><small>Dieci regole. Da leggere, davvero.</small></span>
+        <span class="contatto-cta">Leggi</span></a></li>
+    </ul>
+  </section>
+
+  <footer class="piede">
+    <p class="piede-motto">Un po' di disagio condiviso, per rendere il viaggio ancora più memorabile.</p>
+    <p>Pagina personale, non è un canale ufficiale di Avventure nel Mondo: per iscriversi si passa dal loro sito.</p>
+    <p class="crediti">Foto delle partenze da Wikimedia Commons: <a href="https://commons.wikimedia.org/wiki/File:Fuego_volcano_in_Guatemala_erupting_at_night_in_2017.jpg" target="_blank" rel="noopener">vulcano Fuego</a> di Rick Thomas, <a href="https://creativecommons.org/licenses/by/3.0" target="_blank" rel="noopener">CC BY 3.0</a>; <a href="https://commons.wikimedia.org/wiki/File:Isla_Phi_Phi_Lay,_Tailandia,_2013-08-19,_DD_04.JPG" target="_blank" rel="noopener">Phi Phi Leh</a> di Diego Delso, <a href="https://creativecommons.org/licenses/by-sa/3.0" target="_blank" rel="noopener">CC BY-SA 3.0</a>. Foto ridotte.</p>
+  </footer>
+</main>
+
+<div class="azioni" role="group" aria-label="Scrivimi">
+  <a class="azione" href="https://wa.me/393935015025?text=Ciao%20Manfredi%2C%20ti%20scrivo%20per%20un%20viaggio" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 11.6a8.6 8.6 0 0 1-12.7 7.6L3.5 20.5l1.3-4.1a8.6 8.6 0 1 1 15.7-4.8Z"/></svg>
+    Scrivimi su WhatsApp
+  </a>
+  <a class="azione azione-ig" href="https://ig.me/m/manfredi.jpg" target="_blank" rel="noopener" aria-label="Scrivimi su Instagram">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".6" fill="currentColor"/></svg>
+  </a>
+</div>
+
+<script>
+(() => {
+"use strict";
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const RIDUCI = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const MESI = ["gen", "feb", "mar", "apr", "mag", "giu", "lug", "ago", "set", "ott", "nov", "dic"];
+const giorno = s => { const [y, m, d] = s.split("-").map(Number); return new Date(y, m - 1, d); };
+const diff = (a, b) => Math.round((b - a) / 864e5);
+const adesso = new Date();
+const oggi = new Date(adesso.getFullYear(), adesso.getMonth(), adesso.getDate());
+
+/* --- partenze: dal giorno della partenza il viaggio passa tra quelli fatti --- */
+const griglia = $("#griglia");
+const partenze = $$(".partenza").map(li => ({ li, d: li.dataset, dal: giorno(li.dataset.dal), al: giorno(li.dataset.al) }));
+const partite = partenze.filter(p => oggi >= p.dal).sort((a, b) => a.dal - b.dal);
+const attive = partenze.filter(p => oggi < p.dal).sort((a, b) => a.dal - b.dal);
+const inCorso = partite.find(p => oggi <= p.al);
+partite.forEach(p => {
+  const d = p.d, nuovo = document.createElement("li"), corre = oggi <= p.al;
+  nuovo.className = "coord";
+  Object.assign(nuovo.dataset, { ruolo: "coord", anno: String(p.dal.getFullYear()), dal: d.dal, al: d.al, cod: d.cod, titolo: d.titolo, breve: d.breve || d.titolo, foto: d.foto });
+  if (corre) nuovo.dataset.inCorso = "";
+  nuovo.style.setProperty("--c", p.li.style.getPropertyValue("--c"));
+  nuovo.innerHTML = `<a class="tessera" target="_blank" rel="noopener"><img src="foto/mini/${d.foto}" alt="" loading="lazy"><span class="ruolo" aria-hidden="true">Coordinatore</span><span class="didascalia"><b></b><span class="anno"></span><span class="sr">, da coordinatore. Scheda del viaggio.</span></span></a>`;
+  nuovo.querySelector("a").href = p.li.querySelector("a").href;
+  nuovo.querySelector("img").addEventListener("error", e => e.target.remove());
+  nuovo.querySelector("b").textContent = d.titolo;
+  nuovo.querySelector(".anno").textContent = corre ? "in corso" : String(p.dal.getFullYear());
+  griglia.append(nuovo);
+  p.li.remove();
+});
+if (!attive.length) {
+  $("#tabellone").innerHTML = '<li class="partenza"><a class="p-link" href="https://wa.me/393935015025?text=Ciao%20Manfredi%2C%20ti%20scrivo%20per%20un%20viaggio" target="_blank" rel="noopener"><span class="p-nome">Nuove partenze in arrivo</span><span class="p-nota">Intanto scrivimi su WhatsApp.</span></a></li>';
+}
+
+// etichetta come sul sito AvM: Completo, Quasi completo, Confermato; sotto il minimo "Si parte con N iscritti"
+function etichetta(p) {
+  if (p.d.iscritti === undefined || p.d.iscritti === "") return null;
+  const n = Number(p.d.iscritti), max = Number(p.d.max) || 0, minimo = Number(p.d.minimo) || 3;
+  if (max > 0 && n >= max) return { txt: "Completo", cls: "is-pieno" };
+  if (max > 0 && max - n <= 3) return { txt: "Quasi completo", cls: "is-quasi" };
+  if (n >= minimo) return { txt: "Confermato", cls: "is-ok" };
+  return { txt: `Si parte con ${minimo} iscritti`, cls: "is-forma" };
+}
+
+const SET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+function cella(c) {
+  const f = document.createElement("span");
+  f.className = "flap";
+  f.dataset.c = c;
+  f.innerHTML = '<span class="mezza su"><i></i></span><span class="mezza giu"><i></i></span><span class="foglia su"><i></i></span><span class="foglia giu"><i></i></span>';
+  const iniziale = RIDUCI && c !== " " ? c : " ";
+  f.querySelectorAll(".mezza i").forEach(el => { el.textContent = iniziale; });
+  return f;
+}
+function flaps(testo, n, grande) {
+  const span = document.createElement("span");
+  span.className = "flaps" + (grande ? " grande" : "");
+  span.setAttribute("aria-hidden", "true");
+  for (const c of testo.toUpperCase().padEnd(n, " ")) span.append(cella(c));
+  return span;
+}
+
+attive.forEach(p => {
+  const a = p.li.querySelector("a"), data = a.querySelector(".p-data"), nome = a.querySelector(".p-nome");
+  const sr = t => Object.assign(document.createElement("span"), { className: "sr", textContent: t });
+  data.replaceChildren(flaps(`${String(p.dal.getDate()).padStart(2, "0")} ${MESI[p.dal.getMonth()]}`, 6, false), sr(data.textContent));
+  const righe = (p.d.tabellone || p.d.titolo).split("/");
+  nome.replaceChildren(...righe.map((r, k) => { const f = flaps(r.trim(), 11, true); if (k) f.classList.add("seconda"); return f; }), sr(nome.textContent));
+  const posti = a.querySelector(".p-posti"), presi = Number(p.d.iscritti), max = Number(p.d.max) || 0;
+  if (posti && p.d.iscritti !== undefined && p.d.iscritti !== "") {
+    posti.textContent = `${presi} ${presi === 1 ? "iscritto" : "iscritti"}${max ? ` su ${max}` : ""}`;
+    if (max) {
+      const pallini = document.createElement("span");
+      pallini.className = "posti";
+      pallini.setAttribute("aria-hidden", "true");
+      for (let k = 0; k < max; k++) pallini.append(Object.assign(document.createElement("i"), { className: k < presi ? "preso" : "" }));
+      posti.prepend(pallini);
+    }
+  }
+  const n = diff(oggi, p.dal), quanto = a.querySelector(".p-quanto");
+  quanto.prepend(n === 1 ? "domani" : `tra ${n} giorni`);
+  quanto.classList.toggle("presto", n <= 21);
+  const e = etichetta(p);
+  if (e && e.cls === "is-pieno") p.li.querySelector(".p-iscriviti:not(.p-info)")?.remove();
+  if (e) {
+    const pill = document.createElement("span");
+    pill.className = "p-stato " + e.cls;
+    pill.textContent = e.txt;
+    a.querySelector(".p-piede").prepend(pill);
+  }
+  const date = p.dal.getMonth() === p.al.getMonth()
+    ? `${p.dal.getDate()}–${p.al.getDate()} ${MESI[p.al.getMonth()]}`
+    : `${p.dal.getDate()} ${MESI[p.dal.getMonth()]} – ${p.al.getDate()} ${MESI[p.al.getMonth()]}`;
+  a.querySelector(".p-quando").textContent = `${date}, cod. ${p.d.cod}`;
+});
+
+// la metà superiore cade sul cardine e scopre la nuova lettera, poi la metà inferiore si chiude sopra la vecchia
+const CADE = [{ transform: "rotateX(0deg)", filter: "brightness(1)" }, { transform: "rotateX(-90deg)", filter: "brightness(.55)" }];
+const CHIUDE = [{ transform: "rotateX(90deg)", filter: "brightness(1.4)" }, { transform: "rotateX(0deg)", filter: "brightness(1)" }];
+function sfoglia(f, nuovo, durata) {
+  const [mSu, mGiu, fSu, fGiu] = f.children;
+  fSu.firstChild.textContent = mSu.firstChild.textContent;
+  fGiu.firstChild.textContent = nuovo;
+  mSu.firstChild.textContent = nuovo;
+  fSu.style.visibility = fGiu.style.visibility = "visible";
+  const meta = durata / 2;
+  fSu.animate(CADE, { duration: meta, easing: "cubic-bezier(.77,0,.175,1)", fill: "forwards" });
+  fGiu.animate(CHIUDE, { duration: meta, delay: meta, easing: "cubic-bezier(.23,1,.32,1)", fill: "backwards" }).onfinish = () => {
+    mGiu.firstChild.textContent = nuovo;
+    fSu.style.visibility = fGiu.style.visibility = "hidden";
+  };
+}
+function giraFlaps() {
+  if (RIDUCI) return;
+  $$(".tabellone .flaps").forEach(gruppo => {
+    [...gruppo.children].forEach((f, i) => {
+      const fine = f.dataset.c === " " ? " " : f.dataset.c;
+      let giri = 3 + Math.floor(Math.random() * 5) + i;
+      const tick = () => {
+        const ultimo = giri-- <= 0;
+        sfoglia(f, ultimo ? fine : SET[Math.floor(Math.random() * SET.length)], 76);
+        if (!ultimo) setTimeout(tick, 84 + Math.random() * 24);
+      };
+      setTimeout(tick, 80 + i * 40 + Math.random() * 60);
+    });
+  });
+}
+if ("IntersectionObserver" in window) {
+  const io = new IntersectionObserver(voci => { if (voci.some(v => v.isIntersecting)) { io.disconnect(); giraFlaps(); } }, { threshold: .35 });
+  io.observe($("#tabellone"));
+} else giraFlaps();
+
+/* --- ritratto nel tempo --- */
+const viaggi = $$("#griglia > li");
+const nCoord = viaggi.filter(li => li.dataset.ruolo === "coord").length;
+const prossima = attive[0];
+const fotogrammi = viaggi.map((li, k) => {
+  const d = li.dataset;
+  const frase = li.querySelector(".frase");
+  const corre = d.inCorso !== undefined;
+  return {
+    titolo: d.titolo, breve: d.breve || d.titolo, anno: Number(d.anno), annoTesto: d.anno,
+    riga: `${d.ruolo === "coord" ? "da coordinatore" : "da partecipante"}, ${corre ? "in corso adesso" : `viaggio ${k + 1} di ${viaggi.length}`}`,
+    frase: frase ? `«${frase.textContent.trim()}»` : "",
+    coord: d.ruolo === "coord", foto: d.foto, alza: Number(d.alza) || 0, colore: li.style.getPropertyValue("--c").trim() || "#2c2c2e", li,
+    scheda: (li.querySelector("a.tessera") || {}).href || ""
+  };
+});
+const base = `${viaggi.length} viaggi con Avventure, ${nCoord} da coordinatore.`;
+let rigaOggi = base, numeroOggi = String(viaggi.length), testoOggi = "viaggi con Avventure nel Mondo";
+if (inCorso) {
+  const g = diff(inCorso.dal, oggi) + 1, tot = diff(inCorso.dal, inCorso.al) + 1;
+  rigaOggi = `${base} Adesso sono in viaggio: ${inCorso.d.breve || inCorso.d.titolo}, giorno ${g} di ${tot}.`;
+  numeroOggi = String(g);
+  testoOggi = `giorno di ${tot}, in viaggio: ${inCorso.d.breve || inCorso.d.titolo}`;
+} else if (prossima) {
+  const n = diff(oggi, prossima.dal);
+  rigaOggi = `${base} Il prossimo parte ${n === 1 ? "domani" : `tra ${n} giorni`}: ${prossima.d.breve || prossima.d.titolo}.`;
+  numeroOggi = String(n);
+  testoOggi = `${n === 1 ? "giorno" : "giorni"} alla partenza: ${prossima.d.breve || prossima.d.titolo}`;
+}
+// senza ritratto il conto alla rovescia è già in grande sulla foto: la riga del pannello non lo ripete
+const oggiFrame = { titolo: "Oggi", anno: oggi.getFullYear(), annoTesto: String(oggi.getFullYear()), riga: base, frase: "", coord: false, foto: "hero.jpg", colore: getComputedStyle(document.documentElement).getPropertyValue("--oggi").trim(), oggi: true, scheda: "" };
+fotogrammi.push(oggiFrame);
+$("#p-riga").textContent = base;
+
+const OGGI = fotogrammi.length - 1;
+const tempo = $("#tempo"), palco = $("#palco"), linea = $("#linea");
+const strati = [$("#scatto-a"), Object.assign(document.createElement("img"), { className: "scatto", alt: "", hidden: true })];
+strati[0].after(strati[1]);
+const palcoTitolo = $("#palco-titolo");
+const pViaggio = $("#p-viaggio"), pAnno = $("#p-anno"), pRiga = $("#p-riga"), pFrase = $("#p-frase"), pScheda = $("#p-scheda"), annuncio = $("#annuncio");
+function titoloPalco(f) {
+  if (!f.oggi) { palcoTitolo.textContent = f.breve || f.titolo; return; }
+  palcoTitolo.replaceChildren(
+    Object.assign(document.createElement("span"), { className: "numero", textContent: numeroOggi }),
+    Object.assign(document.createElement("span"), { className: "numero-testo", textContent: testoOggi })
+  );
+}
+titoloPalco(fotogrammi[OGGI]);
+
+// posizioni: passo fisso tra un viaggio e l'altro, più spazio per gli anni saltati; il futuro dopo "oggi"
+let u = 0;
+const unita = fotogrammi.map((f, i) => {
+  if (i > 0) u += 1 + Math.max(0, f.anno - fotogrammi[i - 1].anno - 1) * 1.5;
+  return u;
+});
+const unitaFuture = attive.map(() => (u += 1.6));
+const pct = x => 3 + (x / Math.max(u, 1)) * 92;
+const posizioni = unita.map(pct);
+
+linea.innerHTML = '<div class="binario"></div>';
+if (attive.length) {
+  const futuro = document.createElement("div");
+  futuro.className = "futuro";
+  futuro.style.left = posizioni[OGGI] + "%";
+  futuro.style.width = (pct(unitaFuture[unitaFuture.length - 1]) - posizioni[OGGI]) + "%";
+  linea.append(futuro);
+}
+fotogrammi.forEach((f, i) => {
+  if (f.oggi) return;
+  const t = document.createElement("span");
+  t.className = "tacca" + (f.coord ? " coord" : "");
+  t.style.left = posizioni[i] + "%";
+  linea.append(t);
+});
+attive.forEach((p, i) => {
+  const a = document.createElement("a");
+  a.className = "tacca-futura";
+  a.href = "#partenze";
+  a.style.left = pct(unitaFuture[i]) + "%";
+  a.setAttribute("aria-label", `${p.d.titolo}, partenza il ${p.dal.getDate()} ${MESI[p.dal.getMonth()]}`);
+  linea.append(a);
+});
+// etichette: gli anni senza sovrapposizioni, poi "oggi" e i mesi delle partenze
+const etichette = [];
+fotogrammi.forEach((f, i) => { if (i === 0 || (!f.oggi && f.anno !== fotogrammi[i - 1].anno)) etichette.push({ x: posizioni[i], t: f.annoTesto }); });
+const xOggi = posizioni[OGGI];
+const tenute = [];
+etichette.forEach(e => { if ((!tenute.length || e.x - tenute[tenute.length - 1].x >= 9) && xOggi - e.x >= 9) tenute.push(e); });
+tenute.push({ x: xOggi, t: "oggi" });
+attive.forEach((p, i) => tenute.push({ x: pct(unitaFuture[i]), t: MESI[p.dal.getMonth()], futura: true }));
+tenute.forEach((e, i) => {
+  const s = document.createElement("span");
+  s.className = "etichetta" + (i === 0 ? " prima" : "") + (e.futura ? " futura" : "");
+  s.style.left = e.x + "%";
+  s.textContent = e.t;
+  linea.append(s);
+});
+const cursore = document.createElement("span");
+cursore.className = "cursore";
+cursore.tabIndex = 0;
+cursore.setAttribute("role", "slider");
+cursore.setAttribute("aria-label", "Linea del tempo dei viaggi");
+cursore.setAttribute("aria-valuemin", "0");
+cursore.setAttribute("aria-valuemax", String(OGGI));
+linea.append(cursore);
+linea.hidden = false;
+$("#istruzione").hidden = false;
+
+// foto: piccole per lo scorrimento veloce, grandi a riposo; il colore del viaggio si prende dalla foto
+const statoFoto = new Map();
+function carica(src) {
+  if (statoFoto.has(src)) return statoFoto.get(src);
+  const pr = new Promise(ok => {
+    const im = new Image();
+    im.onload = () => ok(im);
+    im.onerror = () => ok(null);
+    im.src = src;
+  });
+  statoFoto.set(src, pr);
+  return pr;
+}
+function coloreDa(im) {
+  try {
+    const W = 30, H = 38, c = document.createElement("canvas");
+    c.width = W; c.height = H;
+    const x = c.getContext("2d", { willReadFrequently: true });
+    x.drawImage(im, 0, 0, W, H);
+    const d = x.getImageData(0, 0, W, H).data, tot = W * H;
+    // tinte in 18 spicchi da 20 gradi: per ognuno quanti pixel e quanto sono accesi (croma)
+    const N = 18, n = new Float32Array(N), cr = new Float32Array(N), cx = new Float32Array(N), cy = new Float32Array(N);
+    for (let i = 0; i < d.length; i += 4) {
+      const r = d[i] / 255, g = d[i + 1] / 255, b = d[i + 2] / 255;
+      const mx = Math.max(r, g, b), mn = Math.min(r, g, b), ch = mx - mn;
+      if (ch < .12 || mx < .1) continue;
+      let h = mx === r ? (g - b) / ch + (g < b ? 6 : 0) : mx === g ? (b - r) / ch + 2 : (r - g) / ch + 4;
+      h *= 60;
+      const k = Math.floor(h / 20) % N, a = h * Math.PI / 180;
+      n[k]++; cr[k] += ch; cx[k] += Math.cos(a) * ch; cy[k] += Math.sin(a) * ch;
+    }
+    // vince la tinta più accesa (spicchio più i due vicini), purché occupi almeno il 6% della foto
+    let best = -1, top = 0;
+    for (let k = 0; k < N; k++) {
+      const v3 = [(k + N - 1) % N, k, (k + 1) % N], nn = v3.reduce((t, j) => t + n[j], 0);
+      if (!nn) continue;
+      const v = v3.reduce((t, j) => t + cr[j], 0) / nn * Math.min(1, nn / tot / .06);
+      if (v > top) { top = v; best = k; }
+    }
+    if (best < 0) return null;
+    const v3 = [(best + N - 1) % N, best, (best + 1) % N];
+    const h = Math.round((Math.atan2(v3.reduce((t, j) => t + cy[j], 0), v3.reduce((t, j) => t + cx[j], 0)) * 180 / Math.PI + 360) % 360);
+    // stessa profondità per ogni tinta: la luminosità dà circa 9:1 di contrasto col testo bianco
+    const lin = v => v <= .04045 ? v / 12.92 : ((v + .055) / 1.055) ** 2.4;
+    const Y = l => {
+      const C = (1 - Math.abs(2 * l - 1)) * .6, X = C * (1 - Math.abs(h / 60 % 2 - 1)), m = l - C / 2;
+      const [r, g, b] = h < 60 ? [C, X, 0] : h < 120 ? [X, C, 0] : h < 180 ? [0, C, X] : h < 240 ? [0, X, C] : h < 300 ? [X, 0, C] : [C, 0, X];
+      return .2126 * lin(r + m) + .7152 * lin(g + m) + .0722 * lin(b + m);
+    };
+    let lo = .1, hi = .5;
+    for (let i = 0; i < 18; i++) { const mid = (lo + hi) / 2; if (Y(mid) < .07) lo = mid; else hi = mid; }
+    return `hsl(${h} 60% ${Math.round(lo * 100)}%)`;
+  } catch (e) { return null; }
+}
+carica("foto/hero.jpg").then(im => {
+  if (!im) return;
+  oggiFrame.riga = rigaOggi;
+  if (corrente === OGGI) pRiga.textContent = rigaOggi;
+});
+fotogrammi.forEach(f => {
+  carica("foto/mini/" + f.foto).then(im => {
+    if (!im || f.oggi || f.li.dataset.coloreFisso !== undefined) return;
+    const c = coloreDa(im);
+    if (!c) return;
+    f.colore = c;
+    f.li.style.setProperty("--c", c);
+    if (fotogrammi[corrente] === f) tempo.style.setProperty("--colore-viaggio", c);
+  });
+});
+
+let corrente = OGGI, livello = 0, richiesta = 0;
+const generazione = [0, 0];
+async function mostraFoto(f, veloce) {
+  const mio = ++richiesta;
+  const grande = "foto/" + f.foto, piccola = "foto/mini/" + f.foto;
+  let im = veloce ? await carica(piccola) : null;
+  if (mio !== richiesta) return;
+  if (!im) im = await carica(grande);
+  if (mio !== richiesta) return;
+  if (!im && !veloce) im = await carica(piccola);
+  if (mio !== richiesta) return;
+  titoloPalco(f);
+  if (!im) {
+    strati.forEach(s => { s.classList.remove("is-on"); s.hidden = true; });
+    palco.classList.add("senza-foto");
+    return;
+  }
+  palco.classList.remove("senza-foto");
+  const ip = 1 - livello, iu = livello;
+  const prossimo = strati[ip], uscente = strati[iu];
+  generazione[ip]++;
+  const g = generazione[iu];
+  prossimo.src = im.src;
+  // data-alza: alza la foto di N% quando il soggetto è troppo in basso; sotto entra il colore del viaggio.
+  // La sfumatura si allunga con l'alzata, così il bordo della foto non si vede.
+  prossimo.style.transform = f.alza ? `translateY(-${f.alza}%)` : "";
+  prossimo.style.webkitMaskImage = prossimo.style.maskImage = f.alza ? `linear-gradient(to bottom, #000 ${80 - f.alza}%, transparent)` : "";
+  prossimo.alt = f.oggi ? "Manfredi oggi" : `Manfredi in viaggio: ${f.titolo}, ${f.annoTesto}`;
+  prossimo.hidden = false;
+  requestAnimationFrame(() => {
+    prossimo.classList.add("is-on");
+    uscente.classList.remove("is-on");
+  });
+  livello = ip;
+  // lo strato uscente si nasconde a dissolvenza finita, solo se nel frattempo non è stato riusato
+  setTimeout(() => { if (generazione[iu] === g) uscente.hidden = true; }, veloce ? 40 : 260);
+}
+
+function vai(i, veloce) {
+  i = Math.max(0, Math.min(OGGI, i));
+  const cambia = i !== corrente;
+  corrente = i;
+  const f = fotogrammi[i];
+  tempo.style.setProperty("--colore-viaggio", f.colore);
+  pViaggio.textContent = f.titolo;
+  pAnno.textContent = f.annoTesto;
+  pRiga.textContent = f.riga;
+  pFrase.textContent = f.frase;
+  pFrase.hidden = !f.frase;
+  pScheda.hidden = !f.scheda;
+  if (f.scheda) pScheda.href = f.scheda;
+  cursore.style.left = posizioni[i] + "%";
+  cursore.setAttribute("aria-valuenow", String(i));
+  cursore.setAttribute("aria-valuetext", f.oggi ? "Oggi" : `${f.titolo}, ${f.annoTesto}, ${f.riga}`);
+  palco.classList.toggle("rapido", !!veloce);
+  if (cambia || !veloce) mostraFoto(f, veloce);
+  if (!veloce) annuncio.textContent = f.oggi ? "Oggi" : `${f.titolo}, ${f.annoTesto}, ${f.riga}`;
+}
+
+// time-lapse all'apertura: dal 2019 a oggi, una volta sola
+let timerLapse = null;
+function fermaLapse() {
+  if (timerLapse === null) return;
+  clearTimeout(timerLapse);
+  timerLapse = null;
+  linea.classList.remove("lapse");
+}
+function lapse() {
+  if (RIDUCI || corrente !== OGGI || document.visibilityState !== "visible") return;
+  let i = 0;
+  linea.classList.add("lapse");
+  const passo = () => {
+    if (i >= OGGI) { timerLapse = null; linea.classList.remove("lapse"); vai(OGGI, false); return; }
+    vai(i, true);
+    const t = i / OGGI;
+    i++;
+    timerLapse = setTimeout(passo, 55 + 175 * Math.pow(2 * t - 1, 2));
+  };
+  timerLapse = setTimeout(passo, 350);
+}
+const attesa = new Promise(ok => setTimeout(ok, 1800));
+Promise.race([Promise.all(fotogrammi.map(f => carica("foto/mini/" + f.foto))), attesa]).then(lapse);
+
+// trascinare la linea del tempo
+function indiceDa(x) {
+  const r = linea.getBoundingClientRect(), p = (x - r.left) / r.width * 100;
+  let migliore = 0, distanza = Infinity;
+  posizioni.forEach((q, i) => { const d = Math.abs(q - p); if (d < distanza) { distanza = d; migliore = i; } });
+  return migliore;
+}
+linea.addEventListener("pointerdown", e => {
+  if (e.target.closest(".tacca-futura")) return;
+  fermaLapse();
+  linea.setPointerCapture(e.pointerId);
+  linea.classList.add("trascina");
+  vai(indiceDa(e.clientX), true);
+});
+linea.addEventListener("pointermove", e => { if (linea.hasPointerCapture(e.pointerId)) vai(indiceDa(e.clientX), true); });
+const rilascia = e => {
+  if (!linea.classList.contains("trascina")) return;
+  linea.classList.remove("trascina");
+  if (linea.hasPointerCapture(e.pointerId)) linea.releasePointerCapture(e.pointerId);
+  vai(corrente, false);
+};
+linea.addEventListener("pointerup", rilascia);
+linea.addEventListener("pointercancel", rilascia);
+cursore.addEventListener("keydown", e => {
+  const mosse = { ArrowLeft: -1, ArrowDown: -1, ArrowRight: 1, ArrowUp: 1 };
+  if (e.key in mosse) { e.preventDefault(); fermaLapse(); vai(corrente + mosse[e.key], false); }
+  else if (e.key === "Home") { e.preventDefault(); fermaLapse(); vai(0, false); }
+  else if (e.key === "End") { e.preventDefault(); fermaLapse(); vai(OGGI, false); }
+});
+
+// scorrere la foto col dito: a sinistra avanti nel tempo, a destra indietro
+let x0 = null, y0 = 0;
+palco.addEventListener("pointerdown", e => { x0 = e.clientX; y0 = e.clientY; });
+palco.addEventListener("pointerup", e => {
+  if (x0 === null) return;
+  const dx = e.clientX - x0, dy = e.clientY - y0;
+  x0 = null;
+  if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.3) { fermaLapse(); vai(corrente + (dx < 0 ? 1 : -1), false); }
+});
+palco.addEventListener("pointercancel", () => { x0 = null; });
+
+vai(OGGI, false);
+document.addEventListener("visibilitychange", () => { if (document.visibilityState !== "visible") fermaLapse(); });
+})();
+</script>
+</body>
+</html>

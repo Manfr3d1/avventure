@@ -1,0 +1,33 @@
+# Ogni giorno legge iscritti e posti delle partenze dal sito di Avventure nel Mondo
+# e li riscrive in index.html (data-iscritti e data-max). Gira anche dopo ogni modifica alla pagina.
+name: Iscritti dal sito AvM
+
+on:
+  schedule:
+    - cron: "17 5 * * *"
+  push:
+    branches: [main]
+    paths: [index.html]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: iscritti
+  cancel-in-progress: false
+
+jobs:
+  aggiorna:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Leggi iscritti e posti
+        run: python3 .github/scripts/iscritti.py
+      - name: Salva se è cambiato qualcosa
+        run: |
+          if git diff --quiet; then echo "Niente da aggiornare"; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -am "Iscritti aggiornati dal sito di Avventure nel Mondo"
+          git push
