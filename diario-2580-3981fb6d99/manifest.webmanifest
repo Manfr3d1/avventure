@@ -1,0 +1,17 @@
+{
+ "name": "Diario 2580 Guatemala",
+ "short_name": "Diario 2580",
+ "start_url": "./",
+ "scope": "./",
+ "display": "standalone",
+ "background_color": "#1c1c1e",
+ "theme_color": "#1c1c1e",
+ "icons": [
+  {
+   "src": "icona.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "any"
+  }
+ ]
+}
